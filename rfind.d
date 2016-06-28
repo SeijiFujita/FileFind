@@ -82,7 +82,6 @@ public:
 		_status = false;
 		return result;
 	}
-	
 	string[] ex1_splitLines(string line) {
 		import std.algorithm;
 		import std.array;

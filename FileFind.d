@@ -58,7 +58,7 @@ class MainForm
 		});
 	}
 	
-	void thexec() {
+	void findThread() {
 		string dir = dirBox.getText();
 		if (dir.length > 0 && dir.exists() && dir.isDir()) {
 			outputText.setText("");
@@ -117,6 +117,43 @@ class MainForm
 		container.setLayout(new GridLayout(col, false));
 		return container;
 	}
+	
+	string[] regexList;
+	bool searchRegexList(string s) {
+		foreach (v; regexList) {
+			if (v == s) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	string[] dirList;
+	bool searchDirList(string s) {
+		foreach (v; dirList) {
+			if (v == s) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	void addList() {
+		
+		string s = regexBox.getText();
+		if (!searchRegexList(s)) {
+			regexList ~= s;
+			regexBox.setItems(regexList);
+			regexBox.setText(s);
+		}
+		s = dirBox.getText();
+		if (!searchDirList(s)) {
+			dirList ~= s;
+			dirBox.setItems(dirList);
+			dirBox.setText(s);
+		}
+	}
+	
 	void createComponents() {
 		// shell layout
 		shell.setLayout(new GridLayout(1, false));
@@ -131,11 +168,12 @@ class MainForm
 		
 		runbtn = createButton(container, "Start");
 		void onSelection_runbtn(SelectionEvent e) {
+			addList();
 			if (reff.getStatus()) {
 				reff.Stop();
 			} else {
 				runbtn.setText("STOP");
-				thexec();
+				findThread();
 			}
 		}
 		runbtn.addSelectionListener(
@@ -166,6 +204,7 @@ class MainForm
 		//
 		setStatusLine();
 	}
+	
 	string getSearchPath() {
 		import core.runtime: Runtime;
 		string result;
@@ -176,10 +215,12 @@ class MainForm
 		}
 		return result;
 	}
+	
 	void setStatusLine() {
 		statusLine = new Label(shell,  SWT.BORDER /+ SWT.NONE +/);
 		statusLine.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 	}
+	
 	void createText() {
 		outputText = new Text(shell, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
 		GridData layoutData = new GridData(GridData.FILL_BOTH);
@@ -202,6 +243,7 @@ class MainForm
 		outputText.addListener(SWT.Modify, scrollBarListener);
 		setDragDrop(outputText);
 	}
+	
 // https://github.com/d-widget-toolkit/base/blob/master/src/java/lang/wrappers.d
 // stringcast()
 // stringArrayFromObject()
@@ -480,6 +522,5 @@ public:
 		int rgb = (red & 0xFF) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 16);
 		return Color.win32_new(display, rgb);
 	}
-
 }
 

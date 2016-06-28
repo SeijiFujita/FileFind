@@ -1,3 +1,8 @@
+#
+FileFind.debug_log.txt
+rfind.debug_log.txt
+*.exe
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db

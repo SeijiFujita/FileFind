@@ -82,6 +82,7 @@ public:
 		_status = false;
 		return result;
 	}
+	// string line の内容にセパレータ":" が存在したら文字列 line を分割する
 	string[] ex1_splitLines(string line) {
 		import std.algorithm;
 		import std.array;
@@ -111,7 +112,8 @@ public:
 		import std.regex;
 		string fileName = fullpath[dir.length + 1 .. $];
 		foreach (v ; regs) {
-			auto m = match(fileName, regex(v));
+			// i :Case insensitive matching. 
+			auto m = match(fileName, regex(v, "i"));
 			auto c = m.captures;
 			++_fileCount;
 			if (!c.empty()) {

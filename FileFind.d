@@ -120,9 +120,11 @@ class MainForm
 	
 	string[] regexList;
 	bool searchRegexList(string s) {
-		foreach (v; regexList) {
-			if (v == s) {
-				return true;
+		if (s.length) {
+			foreach (v; regexList) {
+				if (v == s) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -130,9 +132,11 @@ class MainForm
 	
 	string[] dirList;
 	bool searchDirList(string s) {
-		foreach (v; dirList) {
-			if (v == s) {
-				return true;
+		if (s.length) {
+			foreach (v; dirList) {
+				if (v == s) {
+					return true;
+				}
 			}
 		}
 		return false;

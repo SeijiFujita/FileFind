@@ -11,8 +11,8 @@ path=C:\D\dmd.2.071.0\windows\bin;C:\D\bin;
 
 @echo on
 
-dmd -wi FileFind.d SelectDirectoryDialog.d rfind.d dlsbuffer.d @dwtlib_normal.txt
-rem dmd -wi -m64 FileFind.d SelectDirectoryDialog.d rfind.d dlsbuffer.d @dwt64lib_normal.txt
+rem dmd -wi FileFind.d SelectDirectoryDialog.d rfind.d dlsbuffer.d @dwtlib_normal.txt
+dmd -wi -m64 FileFind.d SelectDirectoryDialog.d rfind.d dlsbuffer.d @dwt64lib_normal.txt
 rem dmd -wi -g -version=use_main rfind.d dlsbuffer.d
 
 @if ERRORLEVEL 1 goto :eof

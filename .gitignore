@@ -2,6 +2,8 @@
 FileFind.debug_log.txt
 rfind.debug_log.txt
 *.exe
+*.exp
+*.lib
 
 # Windows image file caches
 Thumbs.db

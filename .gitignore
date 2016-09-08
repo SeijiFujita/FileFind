@@ -1,5 +1,6 @@
 #
 FileFind.debug_log.txt
+FileFind64.debug_log.txt
 rfind.debug_log.txt
 *.exe
 *.exp

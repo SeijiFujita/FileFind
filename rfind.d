@@ -25,7 +25,7 @@ private:
 	ulong	_matchCount;
 	ulong   _fileCount;
 	SysTime startTime;
-	SysTime stopTime;
+	SysTime finishTime;
 	
 public:
 	this(void delegate(string) dg) {
@@ -75,7 +75,7 @@ public:
 			
 			startTime = Clock.currTime();
 			findf(dir);
-			stopTime = Clock.currTime();
+			finishTime = Clock.currTime();
 			
 			result = 0;
 		}
@@ -169,9 +169,11 @@ public:
 	string StartTime() {
 		return timeToString(startTime);
 	}
-	string StopTime() {
-		return timeToString(stopTime);
+	string FinishTime() {
+		return timeToString(finishTime);
 	}
+	//string ElapsedTime() {}
+	
 	private string timeToString(SysTime st) {
 		import std.format;
 		return  format(
@@ -254,12 +256,12 @@ int doFind(string regex, string dir, bool outputFile = false, bool fullpath_Flag
 		Result = rfind.findfile(dir, regex, fullpath_Flag);
 		
 		string starttime = rfind.StartTime();
-		string stoptime = rfind.StopTime();
+		string finishtime = rfind.FinishTime();
 		ulong count = rfind.matchCount();
 		ulong files = rfind.fileCount();
 		output("# done...\n"
 			~ "# Start :" ~ starttime ~ "\n"
-			~ "# Stop  :" ~ stoptime  ~ "\n"
+			~ "# Finish:" ~ finishtime ~ "\n"
 			~ "# Files/Match :" ~ to!string(files) ~ "/" ~ to!string(count) ~ " files\n"
 		);
 		//

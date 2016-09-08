@@ -78,7 +78,7 @@ class MainForm
 					ulong count = reff.matchCount();
 					ulong files = reff.fileCount();
 					string starttime = reff.StartTime();
-					string stoptime = reff.StopTime();
+					string finishtime = reff.FinishTime();
 					
 					display.syncExec(new class Runnable {
 						void run() {
@@ -90,9 +90,10 @@ class MainForm
 							outputText.append(
 								tmsg ~ outputText.getLineDelimiter()
 								~ "# Start :" ~ starttime ~ outputText.getLineDelimiter()
-								~ "# Stop  :" ~ stoptime  ~ outputText.getLineDelimiter()
+								~ "# Finish:" ~ finishtime  ~ outputText.getLineDelimiter()
 								~ "# Files/Match :" ~ to!string(files) ~ "/" ~ to!string(count) ~ " files" ~ outputText.getLineDelimiter()
 							);
+							// ~ "# Elapsed: 
 							// runbtn.setEnabled(true);
 							runbtn.setText("Start");
 						}
@@ -143,7 +144,6 @@ class MainForm
 	}
 	
 	void addList() {
-		
 		string s = regexBox.getText();
 		if (!searchRegexList(s)) {
 			regexList ~= s;
@@ -183,6 +183,7 @@ class MainForm
 		runbtn.addSelectionListener(
 		    dgSelectionListener(SelectionListener.SELECTION, &onSelection_runbtn)
 		);
+		
 		// full path check box
 		fullPath = createButton(container, "FullPath", SWT.CHECK);
 		

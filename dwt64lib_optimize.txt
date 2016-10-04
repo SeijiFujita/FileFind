@@ -14,6 +14,6 @@
 -L/ENTRY:mainCRTStartup
 ##64bit
 ..\dwt_local\lib\dwt_base_optimize64.lib
-..\dwt_local\lib\dwt_w32x86_optimize64.lib
+..\dwt_local\lib\dwt_w64x86_optimize64.lib
 
 

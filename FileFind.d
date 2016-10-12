@@ -24,6 +24,11 @@ import rfind;
 import SelectDirectoryDialog;
 import dlsbuffer;
 
+version(Win64) {
+	enum APP_TITLE = "FileFind64";
+} else {
+	enum APP_TITLE = "FileFind";
+}
 
 class MainForm
 {
@@ -38,7 +43,7 @@ class MainForm
 	Find		reff;
 	
 	this() {
-		auto mgr = new WindowManager("Find file.");
+		auto mgr = new WindowManager(APP_TITLE);
 		display = mgr.getDisplay();
 		shell = mgr.getShell();
 		reff = new Find(&puts);

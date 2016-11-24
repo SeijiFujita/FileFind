@@ -129,6 +129,24 @@ public:
 		tree.setLayoutData(new GridData(GridData.FILL_BOTH));
 		// tree.setLinesVisible(true);
 		
+		tree.addListener(SWT.MouseUp, new class Listener {
+			public void handleEvent(Event event) {
+				if (event.button == 1) { // mouse left button
+					// Point point = new Point(event.x, event.y);
+					// TreeFolderItem item = cast(TreeFolderItem)tree.getItem(point);
+					auto items = cast(TreeFolderItem[])tree.getSelection();
+					if (items !is null && items.length >= 1) {
+						dlog("MouseUp: ", items[0].getfullPath());
+						if (items[0].getfullPath().length != 0) {
+							text.setText(items[0].getfullPath());
+							folderUpdate();
+						}
+					}
+				}
+			}
+		});
+
+version (none) {
 		tree.addListener(SWT.MouseDoubleClick, new class Listener {
 			public void handleEvent(Event event) {
 				if (event.button == 1) { // mouse left button
@@ -143,6 +161,7 @@ public:
 				}
 			}
 		});
+}
 version (none) {
 		tree.addTreeListener(new class TreeAdapter {
 			override void treeExpanded(TreeEvent event) {

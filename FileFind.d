@@ -477,6 +477,9 @@ void main()
 //-----------------------------------------------------------------------------
 class WindowManager
 {
+	import org.eclipse.swt.internal.win32.OS;
+	import org.eclipse.swt.internal.win32.WINAPI;
+
 private:
 	Display display;
 	Shell   shell;
@@ -499,6 +502,7 @@ public:
 	}
 	void window(string title, uint width = 600, uint hight = 400) {
 		// create window
+		shell.setImage(loadIcon());
 		shell.setText(title);
 		shell.setSize(width, hight);
 		shell.setLayout(new GridLayout(1, false));
@@ -531,6 +535,21 @@ public:
 	Color getColor(int red, int green, int blue) {
 		int rgb = (red & 0xFF) | ((green & 0xFF) << 8) | ((blue & 0xFF) << 16);
 		return Color.win32_new(display, rgb);
+	}
+//-----------------------------------------------------------------------------
+// Load Window Resouce
+// http://www.nda.co.jp/memo/iconscale/
+// http://home.att.ne.jp/banana/akatsuki/doc/mfc/mfc10/
+//-----------------------------------------------------------------------------
+	immutable IDL_ICON = 100;
+
+	Image loadIcon() {
+		//loadIcon
+		// int cx = OS.GetSystemMetrics(OS.SM_CXSMICON);  // スモールアイコンの幅
+		// int cy = OS.GetSystemMetrics(OS.SM_CYSMICON);  // スモールアイコンの高さ
+		// auto hIcon = OS.LoadImage(null, cast(wchar*)IDL_ICON, OS.IMAGE_ICON, 0, 0, OS.LR_SHARED);
+		auto hIcon = OS.LoadIcon(OS.GetModuleHandle(null), cast(const wchar*)IDL_ICON);
+		return Image.win32_new(null, SWT.ICON, hIcon);
 	}
 }
 

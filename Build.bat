@@ -9,6 +9,7 @@ rem path=C:\D\dmd.2.070.0\windows\bin;C:\D\bin;
 rem path=C:\D\dmd.2.071.0\windows\bin;C:\D\bin;%VC_PATH%;
 rem path=C:\D\dmd.2.071.0\windows\bin;C:\D\bin;
 rem path=C:\D\dmd.2.071.2\windows\bin;C:\D\bin;
+set path=C:\Dev\D\dmd.2.071.2\windows\bin;C:\Dev\D\Bin;
 
 @echo on
 

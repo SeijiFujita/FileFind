@@ -63,7 +63,7 @@ module 名はどうするか？
 
 ****/
 
-module debuglog;
+module dlsbuffer;
 
 
 import std.string : format, lastIndexOf;
@@ -358,7 +358,7 @@ public:
 		void printCount(uint n) {
 			_outLog(format("%06d: ", n));
 		}
-		void printBody(int n) {
+		void printBody(size_t n) {
 			string s;
 			foreach (int i, ubyte v; dumpBuff) {
 				if (i == PrintLen / 2) {
@@ -372,7 +372,7 @@ public:
 			}
 			_outLog(s);
 		}
-		void printAscii(int n) {
+		void printAscii(size_t n) {
 			string s;
 			char c;
 			foreach (int i, ubyte v; dumpBuff) {
